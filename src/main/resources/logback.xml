@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.teddy.graphql.concept.api.log.MaskingPatternLayout">
+                <patternsProperty>([0]+\d{10}|[0]+\d{9})</patternsProperty>
+                <pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %-40.40logger{40} : %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="asyncConsoleAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="consoleAppender"/>
+    </appender>
+
+    <appender name="traceAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.teddy.graphql.concept.api.log.MaskingPatternLayout">
+                <patternsProperty>([0]+\d{10}|[0]+\d{9})</patternsProperty>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%12.12thread] TRACE_LOGGER [%X{TRACE_ID}] %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="asyncTraceAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="traceAppender"/>
+    </appender>
+
+    <logger name="TRACE_LOGGER" level="DEBUG" additivity="false">
+        <appender-ref ref="asyncTraceAppender"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="asyncConsoleAppender"/>
+    </root>
+</configuration>

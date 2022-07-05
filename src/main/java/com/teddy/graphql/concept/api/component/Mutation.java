@@ -1,11 +1,12 @@
 package com.teddy.graphql.concept.api.component;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.teddy.graphql.concept.api.entity.Author;
 import com.teddy.graphql.concept.api.entity.Post;
 import com.teddy.graphql.concept.api.repository.AuthorRepository;
 import com.teddy.graphql.concept.api.repository.PostRepository;
 import java.util.UUID;
+
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
